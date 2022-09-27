@@ -1,0 +1,214 @@
+/* font style */
+@import url("https://fonts.googleapis.com/css2?family=Italiana&display=swap");
+
+$font-family-english: "Italiana", serif;
+
+/* color code*/
+$darkgreen: #ccd6a6;
+$green1: #dae2b6;
+$green2: #dfe8cc;
+$beige: #f7eddb;
+
+// ブレークポイント
+$layout-width-inner: 1200px;
+
+$breakpoints: (
+  "sp": "(max-width: 767px)",
+  //767px以下（iPhone表示)
+  "tab": "(min-width:768px) and (max-width: #{$layout-width-inner  -1px})",
+  "pc": "(min-width: #{$layout-width-inner})"
+    //1200px以上（PC表示),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+) !default;
+
+//メディアクエリー　※default:sp
+@mixin mq($breakpoint: sp) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+// reset css
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+// 共通
+body {
+  font-family: $font-family-english;
+  font-size: 16px;
+}
+
+img {
+  max-width: 100;
+  height: auto;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  top: 0;
+  margin: 0 auto;
+  max-width: $layout-width-inner;
+  width: 100%;
+  height: 1280px;
+  background: url(../img/background.png) no-repeat center center / cover;
+}
+
+.header {
+  margin: 0 auto 20px;
+  text-align: center;
+  padding-top: 235px;
+  width: 900px;
+}
+
+.month {
+  font-size: 30px;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 700;
+
+  h1 {
+    margin: 0 0 20px;
+  }
+}
+
+#input {
+  display: inline-block;
+  width: 300px;
+  padding: 10px;
+
+  border-bottom: 1px solid $darkgreen;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  background: transparent;
+  outline: none;
+
+  &:focus {
+    border-bottom: 3px solid $green1;
+  }
+}
+
+#btn__addTask {
+  margin-left: 20px;
+  display: inline-block;
+  padding: 8px 15px;
+  text-decoration: none;
+  background-color: $darkgreen;
+  color: #fff;
+  border: solid 2px $darkgreen;
+  font-size: 18px;
+
+  border-radius: 3px;
+  transition: 0.4s;
+
+  &:hover {
+    background-color: #fff;
+    color: $darkgreen;
+    border: solid 2px $darkgreen;
+  }
+}
+
+#lists {
+  width: 390px;
+  height: 535px;
+  margin: 0 auto;
+}
+
+.list {
+  font-size: 20px;
+  line-height: 20px;
+  border-bottom: $beige 4px dotted;
+  margin-bottom: 15px;
+}
+
+.removeButton {
+  margin-left: 20px;
+  display: inline-block;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: 2px solid $green1; /* 枠の調整 */
+  color: $green1;
+  border-radius: 50%; /* 丸みの度合い */
+  background: #fff; /* ボタンの背景色 */
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3px; /* 棒の幅（太さ） */
+    height: 22px; /* 棒の高さ */
+    background: $green1; /* バツ印の色 */
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+
+// .inner {
+//   width: $layout-width-inner;
+//   max-width: 100%;
+//   margin: 0 auto;
+
+//   @include mq("tab") {
+//     padding-left: 24px;
+//     padding-right: 24px;
+//   }
+// }
+
+// .section {
+//   padding: 100px 0 120px;
+//   @include mq("sp") {
+//     padding-top: 50px;
+//     padding-bottom: 60px;
+//   }
+// }
+
+// .section-title {
+//   color: $black;
+//   font-size: 48px;
+//   font-family: $font-family-english;
+//   font-weight: bold;
+//   text-align: center;
+//   position: relative; //★セット
+//   padding-bottom: 28px; /*テキストからの距離??上から↓*/
+
+//   &::after {
+//     content: "";
+//     position: absolute; //★セット 〇中央揃えセット
+//     left: 50%; //〇中央揃えセット
+//     transform: translateX(-50%); //〇中央揃えセット
+//     bottom: 0;
+//     width: 60px; /*線の幅*/
+//     height: 4px; /*下線の高さ(太さ)*/
+//     background: $blue;
+//   }
+// }
