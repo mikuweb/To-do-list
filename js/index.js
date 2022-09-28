@@ -40,8 +40,12 @@ taskInput.addEventListener("keypress", (e) => {
   }
 });
 
-//===========================
-//・Centering delete button
-//・Add check box for checking when it's done and strike-through
-//
-//===========================
+//Add strike through
+let strikethroughTrigger = document.querySelector("#lists");
+strikethroughTrigger.addEventListener("click", (event) => {
+  if (event.target.tagName === "LI") {
+    event.target.classList.toggle("is-active");
+    //   event.target.style.textDecoration = 'line-through';
+  }
+});
+
