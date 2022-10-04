@@ -10,8 +10,9 @@
 
 html,
 body {
-  padding: 0;
+  padding: 20px;
   margin: 0;
+  background: linear-gradient(135deg, #dfefed, #bfe9db) fixed;
 }
 
 body {
@@ -36,6 +37,7 @@ a {
 }
 
 .container {
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.5);
   top: 0;
   margin: 0 auto;
   max-width: 1200px;
@@ -47,7 +49,7 @@ a {
   .container {
     max-width: 767px;
     width: 100%;
-    height: 767px;
+    height: auto;
   }
 }
 
@@ -59,7 +61,8 @@ a {
 }
 @media (max-width: 767px) {
   .header {
-    width: 580px;
+    margin: 0 auto;
+    width: 80%;
     margin: 0 auto;
     padding-top: 150px;
   }
@@ -84,14 +87,37 @@ a {
   }
 }
 .title h1 {
-  margin: 0 0 20px;
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .title h1 {
+    margin-bottom: 5px;
+  }
+}
+
+.task__count {
+  color: #777777;
+  margin-top: 0;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.number__count {
+  font-weight: 700;
+  font-size: 25px;
+  transition: all 0.5s ease;
+}
+
+.todo__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #input {
-  display: inline-block;
   width: 300px;
   padding: 10px;
-  border-bottom: 1px solid #ccd6a6;
+  border-bottom: 1px solid #517d99;
   border-right: none;
   border-left: none;
   border-top: none;
@@ -100,36 +126,82 @@ a {
 }
 @media (max-width: 767px) {
   #input {
-    width: 200px;
+    width: 50%;
+    margin-bottom: 3px;
   }
 }
 #input:focus {
-  border-bottom: 3px solid #dae2b6;
+  border-bottom: 3px solid #6ac1b7;
 }
 
 #btn__addTask {
+  margin-left: 10px;
   cursor: pointer;
-  margin-left: 20px;
   display: inline-block;
   padding: 8px 15px;
   text-decoration: none;
-  background-color: #ccd6a6;
+  background-color: #517d99;
   color: #fff;
-  border: solid 2px #ccd6a6;
+  border: solid 2px #517d99;
   font-size: 18px;
   border-radius: 3px;
   transition: 0.4s;
 }
 @media (max-width: 767px) {
   #btn__addTask {
+    margin-left: 10px;
     font-size: 14px;
     padding: 4px 7px;
   }
 }
 #btn__addTask:hover {
   background-color: #fff;
-  color: #ccd6a6;
-  border: solid 2px #ccd6a6;
+  color: #517d99;
+  border: solid 2px #517d99;
+}
+
+.select {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 250px;
+  padding: 10px;
+}
+.select:hover::after {
+  background-color: #fff;
+  color: #517d99;
+  border: solid 1px #517d99;
+}
+.select::after {
+  content: "▼";
+  position: absolute;
+  background-color: #517d99;
+  color: #fff;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  pointer-events: none;
+  transition: 0.4s;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border-bottom: 1px solid #517d99;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  background: transparent;
+  color: #333;
+  cursor: pointer;
+}
+
+.filter__todo {
+  width: 100%;
+  margin-left: 15px;
+  padding: 10px;
 }
 
 #lists {
@@ -147,20 +219,30 @@ a {
 .listItem {
   font-size: 20px;
   line-height: 20px;
-  border-bottom: #f7eddb 4px dotted;
+  border-bottom: #dfefed 4px dotted;
   margin-top: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 5px;
+  transition: all 0.5s ease;
 }
 @media (max-width: 767px) {
   .listItem {
     margin-top: 8px;
+    font-size: 16px;
+    width: 90%;
+    margin: 0 auto;
   }
 }
-.listItem.is-active {
+.listItem.checked {
   text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.fall {
+  transform: translateY(8rem) rotateZ(20deg);
+  opacity: 0;
 }
 
 .removeButton {
@@ -170,8 +252,8 @@ a {
   position: relative;
   width: 30px;
   height: 30px;
-  border: 2px solid #dae2b6; /* 枠の調整 */
-  color: #dae2b6;
+  border: 2px solid #6ac1b7; /* 枠の調整 */
+  color: #6ac1b7;
   border-radius: 50%; /* 丸みの度合い */
   background: #fff; /* ボタンの背景色 */
 }
@@ -182,7 +264,7 @@ a {
   left: 50%;
   width: 3px; /* 棒の幅（太さ） */
   height: 22px; /* 棒の高さ */
-  background: #dae2b6; /* バツ印の色 */
+  background: #6ac1b7; /* バツ印の色 */
 }
 .removeButton::before {
   transform: translate(-50%, -50%) rotate(45deg);
