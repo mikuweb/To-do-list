@@ -12,7 +12,7 @@ html,
 body {
   padding: 20px;
   margin: 0;
-  background: linear-gradient(135deg, #dfefed, #bfe9db) fixed;
+  background: linear-gradient(135deg, #e3f0db, #ccd6a6) fixed;
 }
 
 body {
@@ -117,7 +117,7 @@ a {
 #input {
   width: 300px;
   padding: 10px;
-  border-bottom: 1px solid #517d99;
+  border-bottom: 1px solid #ccd6a6;
   border-right: none;
   border-left: none;
   border-top: none;
@@ -131,7 +131,7 @@ a {
   }
 }
 #input:focus {
-  border-bottom: 3px solid #6ac1b7;
+  border-bottom: 2px solid #80a289;
 }
 
 #btn__addTask {
@@ -140,9 +140,9 @@ a {
   display: inline-block;
   padding: 8px 15px;
   text-decoration: none;
-  background-color: #517d99;
+  background-color: #80a289;
   color: #fff;
-  border: solid 2px #517d99;
+  border: solid 2px #80a289;
   font-size: 18px;
   border-radius: 3px;
   transition: 0.4s;
@@ -156,8 +156,8 @@ a {
 }
 #btn__addTask:hover {
   background-color: #fff;
-  color: #517d99;
-  border: solid 2px #517d99;
+  color: #80a289;
+  border: solid 2px #80a289;
 }
 
 .select {
@@ -169,13 +169,13 @@ a {
 }
 .select:hover::after {
   background-color: #fff;
-  color: #517d99;
-  border: solid 1px #517d99;
+  color: #80a289;
+  border: solid 1px #80a289;
 }
 .select::after {
   content: "▼";
   position: absolute;
-  background-color: #517d99;
+  background-color: #80a289;
   color: #fff;
   top: 0;
   right: 0;
@@ -189,7 +189,7 @@ select {
   -moz-appearance: none;
   appearance: none;
   outline: none;
-  border-bottom: 1px solid #517d99;
+  border-bottom: 1px solid #ccd6a6;
   border-right: none;
   border-left: none;
   border-top: none;
@@ -219,7 +219,7 @@ select {
 .listItem {
   font-size: 20px;
   line-height: 20px;
-  border-bottom: #dfefed 4px dotted;
+  border-bottom: #f4daab 4px dotted;
   margin-top: 15px;
   display: flex;
   justify-content: space-between;
@@ -252,8 +252,8 @@ select {
   position: relative;
   width: 30px;
   height: 30px;
-  border: 2px solid #6ac1b7; /* 枠の調整 */
-  color: #6ac1b7;
+  border: 2px solid #ccd6a6; /* 枠の調整 */
+  color: #ccd6a6;
   border-radius: 50%; /* 丸みの度合い */
   background: #fff; /* ボタンの背景色 */
 }
@@ -264,7 +264,7 @@ select {
   left: 50%;
   width: 3px; /* 棒の幅（太さ） */
   height: 22px; /* 棒の高さ */
-  background: #6ac1b7; /* バツ印の色 */
+  background: #ccd6a6; /* バツ印の色 */
 }
 .removeButton::before {
   transform: translate(-50%, -50%) rotate(45deg);
