@@ -170,18 +170,19 @@ a {
 .select:hover::after {
   background-color: #fff;
   color: #80a289;
-  border: solid 1px #80a289;
 }
 .select::after {
   content: "▼";
   position: absolute;
   background-color: #80a289;
   color: #fff;
-  top: 0;
+  top: 7px;
   right: 0;
   padding: 10px;
   pointer-events: none;
   transition: 0.4s;
+  border: solid 1px #80a289;
+  border-radius: 3px;
 }
 
 select {
@@ -242,6 +243,7 @@ select {
 
 .fall {
   transform: translateY(8rem) rotateZ(20deg);
+  transition: all 0.5s ease;
   opacity: 0;
 }
 
