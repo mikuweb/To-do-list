@@ -1,5 +1,5 @@
 //-----------------------
-// Selector
+// Element selector
 //-----------------------
 const taskAddBtn = document.getElementById("btn__addTask");
 const taskList = document.getElementById("lists");
@@ -10,31 +10,36 @@ const filterOption = document.querySelector(".filter__todo");
 // function Question: how to organize?
 //-----------------------
 
-//Delete task
+// Delete task
 const removeTask = (removeButton) => {
   const targetTask = removeButton.closest("li");
-  targetTask.classList.add("fall"); //Question: how to add classList?
-  taskList.removeChild(targetTask);
+  targetTask.classList.add("fall");
+
+  //wait 500ms
+  setTimeout(() => {
+    taskList.removeChild(targetTask);
+    countRemainingTasks();
+  }, 500);
 };
 
-//Add task & delete button
-const addTask = (task) => {
+// Add task & delete button
+function addTask(task) {
   //Create LI
   const listItem = document.createElement("li");
   listItem.innerText = task;
   listItem.className = "listItem";
   taskList.appendChild(listItem);
 
-  //Create remove× button
+  // Create remove"X" button
   const removeButton = document.createElement("button");
   removeButton.className = "removeButton";
   removeButton.innerText = ""; //×
   listItem.append(removeButton);
   removeButton.addEventListener("click", () => removeTask(removeButton));
-  removeButton.addEventListener("click", countRemainingTasks()); //Question 1/2
-};
+  removeButton.addEventListener("click", removeLocalTodos);
+}
 
-//Select filter
+// Select filter
 function filterTodo(e) {
   const todos = taskList.childNodes; //ひとつひとつのタスク
   todos.forEach(function (todo) {
@@ -64,7 +69,7 @@ function filterTodo(e) {
 }
 filterOption.addEventListener("click", filterTodo);
 
-//Put to do items into LocalStorage
+// Put to do items into LocalStorage
 function saveLocalTodos(listItem) {
   //Check if there is already any data in the Local storage?
   let todos;
@@ -77,56 +82,62 @@ function saveLocalTodos(listItem) {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-//Show TO DO ITEMS after loaded //Question
-// function getTodos() {
-//   console.log("Reloded!");
+// Show TO DO ITEMS after loaded
+function getTodos() {
+  //Check--Do I already have thing in LocalStorage?
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
 
-//   let todos;
-//   if (localStorage.getItem("todos") === null) {
-//     todos = [];
-//   } else {
-//     todos = JSON.parse(localStorage.getItem("todos"));
-//   }
-//   //
-//   todos.forEach(function (listItem) {
-//     //Create LI
-//     const listItem = document.createElement("li");
-//     listItem.innerText = listItem;
-//     listItem.className = "listItem";
-//     taskList.appendChild(listItem);
+  todos.forEach((todo) => addTask(todo));
+  // (↓These are working same way)
+  // todos.forEach(addTask);
+  // todos.forEach(function (todo) {
+  //   addTask(todo);
+  // });
+}
 
-//     //Create remove× button
-//     const removeButton = document.createElement("button");
-//     removeButton.className = "removeButton";
-//     removeButton.innerText = ""; //×
-//     listItem.append(removeButton);
-//     removeButton.addEventListener("click", () => removeTask(removeButton));
-
-//     addTask(listItem);
-//   });
-// }
-
-// Count the number of to do https://stackoverflow.com/questions/52991261/how-to-count-the-number-of-checked-elements-and-the-number-of-total-elements-in
-// Question :not working when it's removed
+// Count the number of to do
 function countRemainingTasks() {
   let totalTasks = document.querySelector("#lists").children.length;
   let checkedTasks = document.querySelectorAll(".checked").length;
   let remainingTasks = totalTasks - checkedTasks;
-  console.log(totalTasks, checkedTasks, remainingTasks);
   let countElement = document.querySelector(".number__count");
   countElement.innerText = remainingTasks;
+}
+
+// Remove from LocalStorage
+function removeLocalTodos(e) {
+  //Check--Do I already have thing in LocalStorage?
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  console.log(todos);
+  console.log(e.target.parentElement.innerText);
+  const todoText = e.target.parentElement.innerText;
+  console.log(todos.indexOf(todoText)); //配列の順序の数字
+  const deleteIndex = todos.indexOf(todoText);
+  const todosCopy = [...todos];
+  todos.splice(deleteIndex, 1);
+  localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 //-----------------------
 // EventListener
 //-----------------------
 
-//When it's loaded save to do items in LocalStorage //Question
-// document.addEventListener("DOMContentLoaded", getTodos);
+//When it's loaded save to do items in LocalStorage🔥
+document.addEventListener("DOMContentLoaded", getTodos);
 
 //Add task when you click "Add" button🔥
 taskAddBtn.addEventListener("click", (e) => {
-  const task = "✓  " + taskInput.value;
+  const task = taskInput.value;
   addTask(task);
 
   //Add to do list to LocalStorage
@@ -142,7 +153,7 @@ taskAddBtn.addEventListener("click", (e) => {
 taskInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault(); //Prevent from reloading
-    const task = "✓  " + taskInput.value;
+    const task = taskInput.value;
     addTask(task);
 
     //Add to do list to LocalStorage
@@ -167,5 +178,3 @@ strikethroughTrigger.addEventListener("click", (event) => {
     countRemainingTasks();
   }
 });
-
-// removeButton.addEventListener("clicked", countRemainingTasks()); //Question 2/2
